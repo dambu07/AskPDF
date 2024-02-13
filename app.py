@@ -4,7 +4,7 @@ import streamlit as st
 
 from agent import Agent
 
-st.set_page_config(page_title="AskPDF")
+st.set_page_config(page_title="Health-Policy-Ai")
 
 
 def read_and_save_file():
@@ -32,7 +32,7 @@ def main():
         else:
             st.session_state["agent"] = None
 
-    st.header("AskPDF")
+    st.header("Health-Policy-Ai")
 
     if st.text_input("OpenAI API Key", value=st.session_state["OPENAI_API_KEY"], key="input_OPENAI_API_KEY"):
         if len(st.session_state["input_OPENAI_API_KEY"]) > 0 and st.session_state["input_OPENAI_API_KEY"] != st.session_state["OPENAI_API_KEY"]:
@@ -40,9 +40,9 @@ def main():
             print('Creating agent')
             st.session_state["agent"] = Agent(st.session_state["OPENAI_API_KEY"])
 
-    st.subheader("Upload a document")
+    st.subheader("Upload Your Health Policy")
     st.file_uploader(
-        "Upload document",
+        "Upload Your Health Policy",
         type=["pdf"],
         key="file_uploader",
         on_change=read_and_save_file,
@@ -51,7 +51,7 @@ def main():
         disabled=not is_openai_api_key_set()
     )
 
-    st.subheader("Ask anything about the PDF")
+    st.subheader("Ask anything about Your Health Policy")
     user_text = st.text_input("empty", label_visibility="collapsed", key="user_input", disabled=not is_openai_api_key_set())
 
     if user_text and len(user_text.strip()) > 0:
